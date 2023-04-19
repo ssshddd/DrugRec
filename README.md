@@ -7,11 +7,13 @@ We recommend installing these key packages with the following command.
 pip install torch  # version >= '1.10.1+cu113'
 pip install nltk
 pip install transformers
+pip install scikit-learn==0.24.2
 conda install -c conda-forge rdkit
 cd ./data/mimic-iii/fariseq && pip install ./
 ```
 Other packages can generally be installed with `pip` or `conda` command.
 ## Data Processing
+### Step 0: Certificate registration and input preparation
 Get the certificate first, and then download the MIMIC-III and MIMIC-IV datasets.
 + MIMIC-III: https://physionet.org/content/mimiciii/1.4/
 + MIMIC-IV: https://physionet.org/content/mimiciv/
@@ -63,16 +65,37 @@ Generate **records_final_iii.pkl** and **ddi_A_iii.pkl** by running **gen_record
 python gen_records_ddi.py
 ```
 
-## Model Training
-To train a new DrugRec model, run the following command.
+## Model Training and Inference
+Here is the key argument:
 ```
-python main.py
+usage: main.py [--Test] [--model_name MODEL_NAME]
+               [--resume_path RESUME_PATH] [--lr LR]
+               [--target_ddi TARGET_DDI] [--kp KP] [--dim DIM]
+               [--CI] [--multivisit]
+
+optional arguments:
+  --Test                test mode
+  --model_name MODEL_NAME
+                        model name
+  --resume_path RESUME_PATH
+                        resume path
+  --lr LR               learning rate
+  --target_ddi TARGET_DDI
+                        target ddi
+  --kp KP               coefficient of P signal
+  --dim DIM             dimension
+  --CI                  causal inference (ATE) loss
+  --mulitivisit         multi visit or single visit
 ```
 
-## Model inference
-To evaluate an existed DrugRec model, you can place the model to the corresponding *resume_path* and run the following command.
+To train a DrugRec model from scratch, run the following command.
 ```
-python main.py --Test --resume_path [YOUR_MODEL_PATH]
+python main.py --model_name [YOUR_MODEL_NAME]
+```
+
+To evaluate an existing DrugRec model, you can place the model to the corresponding *resume_path* and run the following command.
+```
+python main.py --Test --model_name [YOUR_MODEL_NAME] --resume_path [YOUR_RESUME_PATH]
 ```
 
 
