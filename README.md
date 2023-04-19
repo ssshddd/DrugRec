@@ -1,4 +1,4 @@
-# DrugRec-test
+# DrugRec
 This repository is a PyTorch implementation of our NeurIPS 2022 paper **"Debiased, Longitudinal and Coordinated Drug Recommendation through Multi-Visit Clinic Records"**.
 
 ## Installation
@@ -63,9 +63,18 @@ Generate **records_final_iii.pkl** and **ddi_A_iii.pkl** by running **gen_record
 python gen_records_ddi.py
 ```
 
-## Model training
+## Model Training
+To train a new DrugRec model, run the following command.
+```
+python main.py
+```
 
 ## Model inference
+To evaluate an existed DrugRec model, you can place the model to the corresponding *resume_path* and run the following command.
+```
+python main.py --Test --resume_path [YOUR_MODEL_PATH]
+```
+
 
 ## Citation
 ```bibtex
