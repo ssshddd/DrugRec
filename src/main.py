@@ -22,7 +22,7 @@ if not os.path.exists(os.path.join("saved", model_name)):
 
 # Running settings
 parser = argparse.ArgumentParser()
-parser.add_argument('--Test', type=bool, default=False, help="test mode")
+parser.add_argument('--Test', default=False, action='store_true', help="test mode")
 parser.add_argument('--model_name', type=str, default=model_name, help="model name")
 parser.add_argument('--resume_path', type=str, default=resume_path, help='resume path')
 parser.add_argument('--lr', type=float, default=5e-4, help='learning rate')
